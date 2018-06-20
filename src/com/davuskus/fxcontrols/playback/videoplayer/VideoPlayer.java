@@ -16,7 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -196,23 +195,29 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
         controlModel = new MediaModel(media);
 
         controlModel.addStatusListener((oldStatus, newStatus) -> {
-            if (newStatus.equals(MediaPlayer.Status.READY)) {
 
-                controlModel.playMedia();
-                controlModel.pauseMedia();
+            switch (newStatus) {
 
-                rootPane.setDisable(false);
+                case READY:
 
-                if (isAutoPlaying) {
-                    controlModel.playSwitch();
+                    controlModel.playMedia();
+                    controlModel.pauseMedia();
 
-                    if (controlsFadeOutDelayedAnimation != null) {
-                        controlsFadeOutDelayedAnimation.runLater(fadeOutDelayMillis);
+                    rootPane.setDisable(false);
+
+                    if (isAutoPlaying) {
+                        controlModel.playSwitch();
+
+                        if (controlsFadeOutDelayedAnimation != null) {
+                            controlsFadeOutDelayedAnimation.runLater(fadeOutDelayMillis);
+                        }
+
                     }
 
-                }
+                    break;
 
             }
+
         });
 
         controlModel.addOnEndOfMediaListener(() -> {
