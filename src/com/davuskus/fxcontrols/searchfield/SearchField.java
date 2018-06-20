@@ -1,6 +1,6 @@
 package com.davuskus.fxcontrols.searchfield;
 
-import com.davuskus.fxcontrols.interfaces.Action;
+import com.davuskus.utils.interfaces.IAction;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,7 +22,7 @@ public class SearchField implements Initializable {
     @FXML
     private TextField searchBox;
 
-    private Action<String> searchAction;
+    private IAction<String> searchAction;
 
     private boolean isSearchingImmediately;
 
@@ -59,7 +59,7 @@ public class SearchField implements Initializable {
         });
     }
 
-    public void setSearchAction(Action<String> searchAction) {
+    public void setSearchAction(IAction<String> searchAction) {
         this.searchAction = searchAction;
     }
 

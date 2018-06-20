@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0"
-            prefWidth="300.0" stylesheets="@../resources/css/main_stylesheet.css" xmlns="http://javafx.com/javafx/9.0.1"
+            prefWidth="300.0" stylesheets="@../../../../resources/css/main_stylesheet.css" xmlns="http://javafx.com/javafx/9.0.1"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davuskus.fxcontrols.searchfield.SearchField">
     <children>
         <TextField fx:id="searchBox" onAction="#onEnter" prefHeight="40.0" promptText="Sök efter en produkt..."
@@ -28,7 +28,7 @@
                 <ImageView fx:id="searchButtonImageView" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true"
                            preserveRatio="true">
                     <image>
-                        <Image url="@../resources/icons/search/icon_search.png"/>
+                        <Image url="@../../../../resources/icons/search/icon_search.png"/>
                     </image>
                 </ImageView>
             </graphic>

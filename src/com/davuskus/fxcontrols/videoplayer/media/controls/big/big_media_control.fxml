@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<GridPane fx:id="rootPane" maxHeight="-Infinity" minHeight="-Infinity" minWidth="0.0" prefHeight="100.0"
+          stylesheets="@../../../../../../../resources/css/main_stylesheet.css" xmlns="http://javafx.com/javafx/9.0.1"
+          xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="com.davuskus.fxcontrols.videoplayer.media.controls.big.BigMediaControl">
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <children>
+        <Button fx:id="rewindButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                minWidth="-Infinity" mnemonicParsing="false" onAction="#rewindButtonOnAction"
+                onMouseEntered="#mediaControlOnMouseEntered" onMouseExited="#mediaControlOnMouseExited"
+                prefHeight="50.0" prefWidth="50.0" styleClass="transparent-button">
+            <graphic>
+                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../../../../../resources/icons/rewind/icon_rewind_10.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="playButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                mnemonicParsing="false" onAction="#playButtonOnAction" onMouseEntered="#mediaControlOnMouseEntered"
+                onMouseExited="#mediaControlOnMouseExited" prefHeight="75.0" prefWidth="75.0"
+                styleClass="transparent-button" GridPane.columnIndex="1">
+            <graphic>
+                <ImageView fx:id="playImageView" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../../../../../../../resources/icons/play/icon_play.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="forwardButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                minWidth="-Infinity" mnemonicParsing="false" onAction="#forwardButtonOnAction"
+                onMouseEntered="#mediaControlOnMouseEntered" onMouseExited="#mediaControlOnMouseExited"
+                prefHeight="50.0" prefWidth="50.0" styleClass="transparent-button" GridPane.columnIndex="2">
+            <graphic>
+                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../../../../../resources/icons/forward/icon_forward_30.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+    </children>
+</GridPane>

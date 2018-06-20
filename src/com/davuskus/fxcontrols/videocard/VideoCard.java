@@ -1,6 +1,6 @@
 package com.davuskus.fxcontrols.videocard;
 
-import com.davuskus.fxcontrols.interfaces.Action;
+import com.davuskus.utils.interfaces.IAction;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -52,7 +52,7 @@ public class VideoCard implements Initializable {
         playImageView.setOpacity(0.75);
     }
 
-    public void setPlayButtonOnAction(Action<Event> playButtonOnAction) {
+    public void setPlayButtonOnAction(IAction<Event> playButtonOnAction) {
         playButton.setOnAction(event -> playButtonOnAction.execute(event));
     }
 
