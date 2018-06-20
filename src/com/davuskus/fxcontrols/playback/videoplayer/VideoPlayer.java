@@ -267,6 +267,7 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
                 fadeDurationMillis,
                 0,
                 () -> {
+                    mediaControlsPane.setDisable(true);
                     switchView(mediaView);
                     hideCursorDelayedRunnable.runLater(hideCursorDelay);
                 }
@@ -283,6 +284,8 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
     }
 
     private void fadeInControls() {
+
+        mediaControlsPane.setDisable(false);
 
         switchView(mediaControlsPane);
 
