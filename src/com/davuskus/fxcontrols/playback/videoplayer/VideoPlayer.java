@@ -1,7 +1,7 @@
 package com.davuskus.fxcontrols.playback.videoplayer;
 
-import com.davuskus.fxcontrols.playback.MediaModel;
 import com.davuskus.fxcontrols.playback.MediaControl;
+import com.davuskus.fxcontrols.playback.MediaModel;
 import com.davuskus.fxcontrols.playback.mediabar.video.VideoMediaBar;
 import com.davuskus.utils.interfaces.ISelectionListener;
 import com.davuskus.utils.javafx.AnimationCreator;
@@ -39,10 +39,10 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
     private GridPane mediaControlsPane;
 
     @FXML
-    private MediaControl controlsBarController;
+    private MediaControl mediaBarController;
 
     @FXML
-    private MediaControl bigControlsPaneController;
+    private MediaControl simpleControlController;
 
     private MediaModel controlModel;
 
@@ -93,7 +93,7 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
 
         initControlsFadeAnimations();
 
-        ((VideoMediaBar) controlsBarController).setFullscreenComponents(stackPane, rootPane);
+        ((VideoMediaBar) mediaBarController).setFullscreenComponents(stackPane, rootPane);
 
         hasInitialized = true;
 
@@ -221,8 +221,8 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
 
         if (hasInitialized) {
 
-            bigControlsPaneController.setMediaControlModel(controlModel);
-            controlsBarController.setMediaControlModel(controlModel);
+            simpleControlController.setMediaControlModel(controlModel);
+            mediaBarController.setMediaControlModel(controlModel);
 
             mediaView.setMediaPlayer(controlModel.getMediaPlayer());
 
@@ -249,13 +249,17 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
         return new Media(controlModel.getMedia().getSource());
     }
 
+    public boolean isFullscreen() {
+        return ((VideoMediaBar) mediaBarController).isFullscreen();
+    }
+
     private void initControlsFadeAnimations() {
 
         controlsFadeInAnimation = AnimationCreator.getOpacityChangeAnimation(
                 mediaControlsPane,
                 fadeDurationMillis,
                 1,
-                null
+                () -> mediaControlsBgWasPressed = false
         );
 
         controlsFadeOutAnimation = AnimationCreator.getOpacityChangeAnimation(

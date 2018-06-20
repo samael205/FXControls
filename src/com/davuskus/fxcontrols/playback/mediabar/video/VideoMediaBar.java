@@ -1,8 +1,8 @@
 package com.davuskus.fxcontrols.playback.mediabar.video;
 
-import com.davuskus.fxcontrols.playback.mediabar.MediaBar;
-import com.davuskus.fxcontrols.playback.MediaModel;
 import com.davuskus.fxcontrols.playback.MediaControl;
+import com.davuskus.fxcontrols.playback.MediaModel;
+import com.davuskus.fxcontrols.playback.mediabar.MediaBar;
 import com.davuskus.utils.simulator.EventSimulator;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -105,6 +105,13 @@ public class VideoMediaBar extends MediaControl implements Initializable {
             minimizedContentParent.getChildren().add(0, content);
         });
 
+    }
+
+    public boolean isFullscreen() {
+        if (fullscreenStage != null) {
+            return fullscreenStage.isFullScreen();
+        }
+        return false;
     }
 
 }

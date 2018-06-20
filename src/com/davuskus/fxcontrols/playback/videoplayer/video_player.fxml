@@ -22,9 +22,9 @@
                         <RowConstraints vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <fx:include fx:id="bigControlsPane"
+                        <fx:include fx:id="simpleControl"
                                     source="../../playback/simplecontrols/simple_media_control.fxml"/>
-                        <fx:include fx:id="controlsBar" source="../mediabar/video/video_media_bar.fxml"
+                        <fx:include fx:id="mediaBar" source="../mediabar/video/video_media_bar.fxml"
                                     GridPane.rowIndex="1"/>
                     </children>
                 </GridPane>
