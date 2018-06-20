@@ -1,6 +1,5 @@
-package com.davuskus.fxcontrols.videoplayer.media;
+package com.davuskus.fxcontrols.playback;
 
-import com.davuskus.fxcontrols.videoplayer.media.controls.MediaControl;
 import com.davuskus.utils.interfaces.IChangeListener;
 import com.davuskus.utils.javafx.DurationUtils;
 import com.davuskus.utils.javafx.MediaPlayerUtils;

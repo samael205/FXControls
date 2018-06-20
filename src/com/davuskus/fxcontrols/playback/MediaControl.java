@@ -1,6 +1,6 @@
-package com.davuskus.fxcontrols.videoplayer.media.controls;
+package com.davuskus.fxcontrols.playback;
 
-import com.davuskus.fxcontrols.videoplayer.media.MediaModel;
+import com.davuskus.fxcontrols.playback.MediaModel;
 import javafx.util.Duration;
 
 public abstract class MediaControl {

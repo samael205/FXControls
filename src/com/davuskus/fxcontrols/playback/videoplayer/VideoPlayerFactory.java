@@ -1,4 +1,4 @@
-package com.davuskus.fxcontrols.videoplayer;
+package com.davuskus.fxcontrols.playback.videoplayer;
 
 import com.davuskus.utils.javafx.FXMLUtils;
 import com.davuskus.utils.tuple.Tuple;

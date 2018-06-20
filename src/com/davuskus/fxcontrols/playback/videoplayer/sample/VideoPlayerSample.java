@@ -1,6 +1,6 @@
-package com.davuskus.fxcontrols.videoplayer.sample;
+package com.davuskus.fxcontrols.playback.videoplayer.sample;
 
-import com.davuskus.fxcontrols.videoplayer.VideoPlayer;
+import com.davuskus.fxcontrols.playback.videoplayer.VideoPlayer;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

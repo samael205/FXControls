@@ -1,26 +1,19 @@
-package com.davuskus.fxcontrols.videoplayer.media.controls.bar;
+package com.davuskus.fxcontrols.playback.mediabar;
 
-import com.davuskus.fxcontrols.videoplayer.media.MediaModel;
-import com.davuskus.fxcontrols.videoplayer.media.controls.MediaControl;
-import com.davuskus.utils.simulator.EventSimulator;
+import com.davuskus.fxcontrols.playback.MediaModel;
+import com.davuskus.fxcontrols.playback.MediaControl;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
-import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BarMediaControl extends MediaControl implements Initializable {
+public class MediaBar extends MediaControl implements Initializable {
 
     @FXML
     private ImageView playImageView;
@@ -37,9 +30,6 @@ public class BarMediaControl extends MediaControl implements Initializable {
     @FXML
     private Slider volumeSlider;
 
-    @FXML
-    private ImageView fullscreenImageView;
-
     private final Image pauseIcon;
 
     private final Image playIcon;
@@ -50,29 +40,19 @@ public class BarMediaControl extends MediaControl implements Initializable {
 
     private final Image muteIcon;
 
-    private final Image fullscreenIcon;
-
-    private final Image fullscreenMinimizeIcon;
-
     private double volumeBeforeMute;
 
     private boolean timeSliderValueIsChanging;
 
     private boolean volumeSliderValueIsChanging;
 
-    private Stage fullscreenStage;
-
-    private Parent fullscreenContent;
-
-    public BarMediaControl() {
-        String iconsPackagePath = "/resources/icons/";
+    public MediaBar() {
+        String iconsPackagePath = "/com/davuskus/fxcontrols/resources/icons/";
         pauseIcon = new Image(iconsPackagePath + "pause/icon_pause.png");
         playIcon = new Image(iconsPackagePath + "play/icon_play.png");
         replayIcon = new Image(iconsPackagePath + "replay/icon_replay.png");
         speakerIcon = new Image(iconsPackagePath + "speaker/icon_speaker.png");
         muteIcon = new Image(iconsPackagePath + "speaker/icon_mute.png");
-        fullscreenIcon = new Image(iconsPackagePath + "fullscreen/icon_fullscreen_white.png");
-        fullscreenMinimizeIcon = new Image(iconsPackagePath + "fullscreen/icon_fullscreen_minimize_white.png");
     }
 
     @Override
@@ -132,29 +112,6 @@ public class BarMediaControl extends MediaControl implements Initializable {
     @FXML
     private void mediaControlOnMouseExited(Event event) {
         isHoveredOn = false;
-    }
-
-    @FXML
-    private void fullscreenButtonOnAction(Event event) {
-
-        if (fullscreenStage != null && fullscreenContent != null) {
-
-            if (fullscreenStage.isFullScreen()) {
-
-                EventSimulator.simulateKeyEvent(KeyEvent.VK_ESCAPE);
-
-            } else {
-
-                Pane root = (Pane) fullscreenStage.getScene().getRoot();
-                root.getChildren().add(fullscreenContent);
-
-                fullscreenStage.setFullScreen(true);
-                fullscreenStage.show();
-
-            }
-
-        }
-
     }
 
     @Override
@@ -238,39 +195,6 @@ public class BarMediaControl extends MediaControl implements Initializable {
         });
 
         controlModel.addMediaRestartListener(() -> playImageView.setImage(pauseIcon));
-
-    }
-
-    public void setFullscreenComponents(Parent content, Pane minimizedContentParent) {
-
-        if (fullscreenStage != null && fullscreenStage.isShowing()) {
-            fullscreenStage.close();
-        }
-
-        fullscreenStage = new Stage();
-
-        fullscreenContent = content;
-
-        Pane root = new AnchorPane();
-
-        Scene scene = new Scene(root);
-
-        fullscreenStage.setScene(scene);
-
-        fullscreenStage.fullScreenProperty().addListener((observable, wasFullscreen, isFullscreen) -> {
-
-            if (isFullscreen) {
-                fullscreenImageView.setImage(fullscreenMinimizeIcon);
-            } else {
-                fullscreenImageView.setImage(fullscreenIcon);
-                fullscreenStage.close();
-            }
-
-        });
-
-        fullscreenStage.setOnHiding(windowEvent -> {
-            minimizedContentParent.getChildren().add(0, content);
-        });
 
     }
 

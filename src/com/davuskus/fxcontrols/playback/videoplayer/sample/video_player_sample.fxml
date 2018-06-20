@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.*?>
 <AnchorPane prefHeight="380.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/9.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.davuskus.fxcontrols.videoplayer.sample.VideoPlayerSample">
+            fx:controller="com.davuskus.fxcontrols.playback.videoplayer.sample.VideoPlayerSample">
     <children>
         <fx:include fx:id="videoPlayer" source="../video_player.fxml" AnchorPane.bottomAnchor="10.0"
                     AnchorPane.leftAnchor="10.0"

@@ -1,8 +1,8 @@
-package com.davuskus.fxcontrols.videoplayer;
+package com.davuskus.fxcontrols.playback.videoplayer;
 
-import com.davuskus.fxcontrols.videoplayer.media.MediaModel;
-import com.davuskus.fxcontrols.videoplayer.media.controls.MediaControl;
-import com.davuskus.fxcontrols.videoplayer.media.controls.bar.BarMediaControl;
+import com.davuskus.fxcontrols.playback.MediaModel;
+import com.davuskus.fxcontrols.playback.MediaControl;
+import com.davuskus.fxcontrols.playback.mediabar.video.VideoMediaBar;
 import com.davuskus.utils.interfaces.ISelectionListener;
 import com.davuskus.utils.javafx.AnimationCreator;
 import com.davuskus.utils.runnable.DelayedRunnable;
@@ -93,7 +93,7 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
 
         initControlsFadeAnimations();
 
-        ((BarMediaControl) controlsBarController).setFullscreenComponents(stackPane, rootPane);
+        ((VideoMediaBar) controlsBarController).setFullscreenComponents(stackPane, rootPane);
 
         hasInitialized = true;
 

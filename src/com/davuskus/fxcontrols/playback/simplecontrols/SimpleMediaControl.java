@@ -1,7 +1,7 @@
-package com.davuskus.fxcontrols.videoplayer.media.controls.big;
+package com.davuskus.fxcontrols.playback.simplecontrols;
 
-import com.davuskus.fxcontrols.videoplayer.media.MediaModel;
-import com.davuskus.fxcontrols.videoplayer.media.controls.MediaControl;
+import com.davuskus.fxcontrols.playback.MediaModel;
+import com.davuskus.fxcontrols.playback.MediaControl;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BigMediaControl extends MediaControl implements Initializable {
+public class SimpleMediaControl extends MediaControl implements Initializable {
 
     @FXML
     private ImageView playImageView;
@@ -33,12 +33,12 @@ public class BigMediaControl extends MediaControl implements Initializable {
 
     private final Image replayIcon;
 
-    public BigMediaControl() {
+    public SimpleMediaControl() {
         rewindMillis = 10000;
         forwardMillis = 30000;
-        pauseIcon = new Image("/resources/icons/pause/icon_pause.png");
-        playIcon = new Image("/resources/icons/play/icon_play.png");
-        replayIcon = new Image("/resources/icons/replay/icon_replay.png");
+        pauseIcon = new Image("/com/davuskus/fxcontrols/resources/icons/pause/icon_pause.png");
+        playIcon = new Image("/com/davuskus/fxcontrols/resources/icons/play/icon_play.png");
+        replayIcon = new Image("/com/davuskus/fxcontrols/resources/icons/replay/icon_replay.png");
     }
 
     @Override
