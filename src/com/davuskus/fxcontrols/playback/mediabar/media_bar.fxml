@@ -18,8 +18,7 @@
         <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
-        <Slider fx:id="timeSlider" blockIncrement="1.0" onMousePressed="#timeSliderOnMousePressed"
-                onMouseReleased="#timeSliderOnMouseReleased">
+        <Slider fx:id="timeSlider" blockIncrement="1.0">
             <cursor>
                 <Cursor fx:constant="DEFAULT"/>
             </cursor>

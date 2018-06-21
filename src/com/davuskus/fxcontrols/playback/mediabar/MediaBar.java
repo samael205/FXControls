@@ -2,6 +2,7 @@ package com.davuskus.fxcontrols.playback.mediabar;
 
 import com.davuskus.fxcontrols.playback.MediaControl;
 import com.davuskus.fxcontrols.playback.MediaModel;
+import com.davuskus.utils.time.TimeUtils;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,7 +47,7 @@ public class MediaBar extends MediaControl implements Initializable {
 
     private double volumeBeforeMute;
 
-    private boolean timeSliderValueIsChanging;
+    private boolean wasPlaying;
 
     public MediaBar() {
         String iconsPackagePath = "/com/davuskus/fxcontrols/resources/icons/";
@@ -62,30 +63,47 @@ public class MediaBar extends MediaControl implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        volumeSlider.valueProperty().addListener((observable, oldVolume, newVolume) -> {
-            controlModel.setVolume(newVolume.doubleValue());
-            updateVolumeIcon(newVolume.doubleValue());
+        timeSlider.setOnMousePressed(event -> {
+
+            if (controlModel.isPlaying()) {
+
+                controlModel.pauseMedia();
+
+                wasPlaying = true;
+
+            }
+
         });
 
-    }
+        timeSlider.setOnMouseReleased(event -> {
 
-    @FXML
-    private void timeSliderOnMousePressed(Event event) {
-        timeSliderValueIsChanging = true;
-    }
+            controlModel.setCurrentTime(timeSlider.getValue() * 1000);
 
-    @FXML
-    private void timeSliderOnMouseReleased(Event event) {
+            if (wasPlaying) {
 
-        controlModel.setCurrentTime(timeSlider.getValue() * 1000);
+                wasPlaying = false;
 
-        if (controlModel.isPlaying()) {
-            playImageView.setImage(pauseIcon);
-        } else {
-            playImageView.setImage(playIcon);
-        }
+                controlModel.playMedia();
 
-        timeSliderValueIsChanging = false;
+            }
+
+            if (controlModel.isPlaying()) {
+                playImageView.setImage(pauseIcon);
+            } else {
+                playImageView.setImage(playIcon);
+            }
+
+        });
+
+        timeSlider.valueProperty().addListener((observable, oldValue, newValue) -> updateTimeLabel());
+
+        volumeSlider.valueProperty().addListener((observable, oldVolume, newVolume) -> {
+
+            controlModel.setVolume(newVolume.doubleValue());
+
+            updateVolumeIcon(newVolume.doubleValue());
+
+        });
 
     }
 
@@ -117,14 +135,8 @@ public class MediaBar extends MediaControl implements Initializable {
 
         controlModel.addCurrentTimeListener((oldDuration, currentDuration) -> {
 
-            if (!timeSliderValueIsChanging) {
+            if (!timeSlider.isValueChanging()) {
                 timeSlider.setValue(currentDuration.toSeconds());
-            }
-
-            if (controlModel.isPlaying()) {
-                playImageView.setImage(pauseIcon);
-            } else {
-                playImageView.setImage(playIcon);
             }
 
             updateTimeLabel();
@@ -187,7 +199,8 @@ public class MediaBar extends MediaControl implements Initializable {
     }
 
     private void updateTimeLabel() {
-        timeLabel.setText(controlModel.getCurrentTimeInText() + "/" + controlModel.getTotalTimeInText());
+        String currentTime = TimeUtils.getTimeText((int) (0.5 + timeSlider.getValue()));
+        timeLabel.setText(currentTime + "/" + controlModel.getTotalTimeInText());
     }
 
     private void updateVolumeIcon(double volumeValue) {
