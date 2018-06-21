@@ -63,6 +63,11 @@ public class MediaBar extends MediaControl implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        volumeSlider.valueProperty().addListener((observable, oldVolume, newVolume) -> {
+            updateVolumeIcon(newVolume.doubleValue());
+        });
+
     }
 
     @FXML
@@ -179,8 +184,6 @@ public class MediaBar extends MediaControl implements Initializable {
 
             } else {
 
-                volumeImageView.setImage(maxVolumeIcon);
-
                 if (!volumeSliderValueIsChanging) {
 
                     if (volumeBeforeMute <= 0) {
@@ -190,6 +193,8 @@ public class MediaBar extends MediaControl implements Initializable {
                     }
 
                 }
+
+                updateVolumeIcon(volumeSlider.getValue());
 
             }
 
@@ -206,6 +211,18 @@ public class MediaBar extends MediaControl implements Initializable {
 
     private void updateTimeLabel() {
         timeLabel.setText(controlModel.getCurrentTimeInText() + "/" + controlModel.getTotalTimeInText());
+    }
+
+    private void updateVolumeIcon(double volumeValue) {
+
+        if (volumeValue < 0.3) {
+            volumeImageView.setImage(lowVolumeIcon);
+        } else if (volumeValue < 0.70) {
+            volumeImageView.setImage(mediumVolumeIcon);
+        } else {
+            volumeImageView.setImage(maxVolumeIcon);
+        }
+
     }
 
 }
