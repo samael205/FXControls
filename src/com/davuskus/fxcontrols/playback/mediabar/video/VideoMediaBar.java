@@ -1,9 +1,12 @@
 package com.davuskus.fxcontrols.playback.mediabar.video;
 
+import com.davuskus.fxcontrols.playback.MediaControl;
+import com.davuskus.fxcontrols.playback.MediaModel;
 import com.davuskus.fxcontrols.playback.mediabar.MediaBar;
 import com.davuskus.utils.simulator.EventSimulator;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -13,8 +16,13 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.awt.event.KeyEvent;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class VideoMediaBar extends MediaBar {
+public class VideoMediaBar extends MediaControl implements Initializable {
+
+    @FXML
+    private MediaBar mediaBarController;
 
     @FXML
     private ImageView fullscreenImageView;
@@ -31,6 +39,10 @@ public class VideoMediaBar extends MediaBar {
         String iconsPackagePath = "/com/davuskus/fxcontrols/resources/icons/";
         fullscreenIcon = new Image(iconsPackagePath + "fullscreen/icon_fullscreen_white.png");
         fullscreenMinimizeIcon = new Image(iconsPackagePath + "fullscreen/icon_fullscreen_minimize_white.png");
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
     }
 
     @FXML
@@ -54,6 +66,12 @@ public class VideoMediaBar extends MediaBar {
 
         }
 
+    }
+
+    @Override
+    public void setMediaControlModel(MediaModel controlModel) {
+        super.setMediaControlModel(controlModel);
+        mediaBarController.setMediaControlModel(controlModel);
     }
 
     public void setFullscreenComponents(Parent content, Pane minimizedContentParent) {

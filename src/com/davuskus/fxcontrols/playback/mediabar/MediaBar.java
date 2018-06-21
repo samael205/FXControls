@@ -1,7 +1,7 @@
 package com.davuskus.fxcontrols.playback.mediabar;
 
-import com.davuskus.fxcontrols.playback.MediaModel;
 import com.davuskus.fxcontrols.playback.MediaControl;
+import com.davuskus.fxcontrols.playback.MediaModel;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
