@@ -82,6 +82,10 @@ public class MediaModel {
         mediaPlayer.setMute(!mediaPlayer.isMute());
     }
 
+    public boolean isMute() {
+        return mediaPlayer.isMute();
+    }
+
     public void disposeMedia() {
         mediaPlayer.dispose();
     }
@@ -203,6 +207,15 @@ public class MediaModel {
 
     public boolean hasFinishedPlayingMedia() {
         return MediaPlayerUtils.hasFinishedPlaying(mediaPlayer);
+    }
+
+    public void setVolume(double volume) {
+        mediaPlayer.setVolume(volume);
+        mediaPlayer.setMute(volume <= 0);
+    }
+
+    public double getVolume() {
+        return mediaPlayer.getVolume();
     }
 
     private void createMediaPlayer(Media media) {

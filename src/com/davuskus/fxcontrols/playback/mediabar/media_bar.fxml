@@ -66,9 +66,8 @@
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Slider fx:id="volumeSlider" blockIncrement="0.01" max="1.0"
-                                        onMousePressed="#volumeSliderOnMousePressed"
-                                        onMouseReleased="#volumeSliderOnMouseReleased" prefWidth="100.0" value="1.0"/>
+                                <Slider fx:id="volumeSlider" blockIncrement="0.01" max="1.0" prefWidth="100.0"
+                                        value="1.0"/>
                             </children>
                         </HBox>
                         <Label fx:id="timeLabel" styleClass="text-normal-white-bold" text="0:00/0:00"/>

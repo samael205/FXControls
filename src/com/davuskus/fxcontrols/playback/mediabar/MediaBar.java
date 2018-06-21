@@ -48,8 +48,6 @@ public class MediaBar extends MediaControl implements Initializable {
 
     private boolean timeSliderValueIsChanging;
 
-    private boolean volumeSliderValueIsChanging;
-
     public MediaBar() {
         String iconsPackagePath = "/com/davuskus/fxcontrols/resources/icons/";
         pauseIcon = new Image(iconsPackagePath + "pause/icon_pause.png");
@@ -65,6 +63,7 @@ public class MediaBar extends MediaControl implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         volumeSlider.valueProperty().addListener((observable, oldVolume, newVolume) -> {
+            controlModel.setVolume(newVolume.doubleValue());
             updateVolumeIcon(newVolume.doubleValue());
         });
 
@@ -91,20 +90,6 @@ public class MediaBar extends MediaControl implements Initializable {
     }
 
     @FXML
-    private void volumeSliderOnMousePressed(Event event) {
-        volumeSliderValueIsChanging = true;
-    }
-
-    @FXML
-    private void volumeSliderOnMouseReleased(Event event) {
-
-        controlModel.getMediaPlayer().setMute(volumeSlider.getValue() <= 0);
-        controlModel.getMediaPlayer().setVolume(volumeSlider.getValue());
-
-        volumeSliderValueIsChanging = false;
-    }
-
-    @FXML
     private void playButtonOnAction(Event event) {
         controlModel.playSwitch();
     }
@@ -112,7 +97,6 @@ public class MediaBar extends MediaControl implements Initializable {
     @FXML
     private void volumeButtonOnAction(Event event) {
         controlModel.muteSwitch();
-        controlModel.getMediaPlayer().setVolume(volumeSlider.getValue());
     }
 
     @FXML
@@ -179,22 +163,15 @@ public class MediaBar extends MediaControl implements Initializable {
             if (isMute) {
 
                 volumeBeforeMute = volumeSlider.getValue();
-                volumeImageView.setImage(muteIcon);
                 volumeSlider.setValue(0);
 
-            } else {
+            } else if (!volumeSlider.isValueChanging()) {
 
-                if (!volumeSliderValueIsChanging) {
-
-                    if (volumeBeforeMute <= 0) {
-                        volumeSlider.setValue(1);
-                    } else {
-                        volumeSlider.setValue(volumeBeforeMute);
-                    }
-
+                if (volumeBeforeMute <= 0) {
+                    volumeSlider.setValue(1);
+                } else {
+                    volumeSlider.setValue(volumeBeforeMute);
                 }
-
-                updateVolumeIcon(volumeSlider.getValue());
 
             }
 
@@ -215,7 +192,9 @@ public class MediaBar extends MediaControl implements Initializable {
 
     private void updateVolumeIcon(double volumeValue) {
 
-        if (volumeValue < 0.3) {
+        if (volumeValue <= 0) {
+            volumeImageView.setImage(muteIcon);
+        } else if (volumeValue < 0.3) {
             volumeImageView.setImage(lowVolumeIcon);
         } else if (volumeValue < 0.70) {
             volumeImageView.setImage(mediumVolumeIcon);
