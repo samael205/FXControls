@@ -36,7 +36,11 @@ public class MediaBar extends MediaControl implements Initializable {
 
     private final Image replayIcon;
 
-    private final Image speakerIcon;
+    private final Image maxVolumeIcon;
+
+    private final Image mediumVolumeIcon;
+
+    private final Image lowVolumeIcon;
 
     private final Image muteIcon;
 
@@ -51,8 +55,10 @@ public class MediaBar extends MediaControl implements Initializable {
         pauseIcon = new Image(iconsPackagePath + "pause/icon_pause.png");
         playIcon = new Image(iconsPackagePath + "play/icon_play.png");
         replayIcon = new Image(iconsPackagePath + "replay/icon_replay.png");
-        speakerIcon = new Image(iconsPackagePath + "speaker/icon_speaker.png");
-        muteIcon = new Image(iconsPackagePath + "speaker/icon_mute.png");
+        maxVolumeIcon = new Image(iconsPackagePath + "volume/icon_volume_3.png");
+        mediumVolumeIcon = new Image(iconsPackagePath + "volume/icon_volume_2.png");
+        lowVolumeIcon = new Image(iconsPackagePath + "volume/icon_volume_1.png");
+        muteIcon = new Image(iconsPackagePath + "volume/icon_volume_0.png");
     }
 
     @Override
@@ -173,7 +179,7 @@ public class MediaBar extends MediaControl implements Initializable {
 
             } else {
 
-                volumeImageView.setImage(speakerIcon);
+                volumeImageView.setImage(maxVolumeIcon);
 
                 if (!volumeSliderValueIsChanging) {
 

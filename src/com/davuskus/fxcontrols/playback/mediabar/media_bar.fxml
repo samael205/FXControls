@@ -61,7 +61,7 @@
                                         <ImageView fx:id="volumeImageView" fitHeight="35.0" fitWidth="35.0"
                                                    pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../../resources/icons/speaker/icon_speaker.png"/>
+                                                <Image url="@../../resources/icons/volume/icon_volume_3.png"/>
                                             </image>
                                         </ImageView>
                                     </graphic>
