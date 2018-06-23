@@ -1,7 +1,7 @@
 package com.davuskus.fxcontrols.playback.simplecontrols;
 
-import com.davuskus.fxcontrols.playback.MediaModel;
 import com.davuskus.fxcontrols.playback.MediaControl;
+import com.davuskus.fxcontrols.playback.MediaModel;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +13,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SimpleMediaControl extends MediaControl implements Initializable {
+
+    @FXML
+    private Button playButton;
 
     @FXML
     private ImageView playImageView;
@@ -118,6 +121,11 @@ public class SimpleMediaControl extends MediaControl implements Initializable {
 
         controlModel.addMediaRestartListener(() -> playImageView.setImage(pauseIcon));
 
+    }
+
+    @Override
+    public boolean isFocused() {
+        return rewindButton.isFocused() || playButton.isFocused() || forwardButton.isFocused();
     }
 
     private void updateForwardButton() {

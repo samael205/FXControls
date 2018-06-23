@@ -94,6 +94,14 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
 
         ((VideoMediaBar) mediaBarController).setFullscreenComponents(stackPane, rootPane);
 
+        stackPane.setOnKeyPressed(event -> {
+
+            if (!controlModel.isMediaControlFocused()) {
+                controlModel.playSwitch();
+            }
+
+        });
+
         hasInitialized = true;
 
     }
@@ -155,14 +163,6 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
 
         mediaControlsBgWasPressed = true;
 
-        if (!controlModel.isPlaying()) {
-            controlModel.playMedia();
-        }
-
-        if (controlModel.hasFinishedPlayingMedia()) {
-            controlModel.restartMedia();
-        }
-
         controlsFadeOutAnimation.play();
 
     }
@@ -216,6 +216,22 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
 
                     break;
 
+                case PLAYING:
+
+                    if (isInFront(mediaControlsPane)) {
+                        controlsFadeOutDelayedAnimation.runLater(fadeOutDelayMillis);
+                    }
+
+                    break;
+
+                case PAUSED:
+
+                    if (isInFront(mediaView)) {
+                        fadeInControls();
+                    }
+
+                    break;
+
             }
 
         });
@@ -264,7 +280,9 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
                 mediaControlsPane,
                 fadeDurationMillis,
                 1,
-                () -> mediaControlsBgWasPressed = false
+                () -> {
+                    mediaControlsBgWasPressed = false;
+                }
         );
 
         controlsFadeOutAnimation = AnimationCreator.getOpacityChangeAnimation(

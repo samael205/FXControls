@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -23,6 +24,9 @@ public class VideoMediaBar extends MediaControl implements Initializable {
 
     @FXML
     private MediaBar mediaBarController;
+
+    @FXML
+    private Button fullscreenButton;
 
     @FXML
     private ImageView fullscreenImageView;
@@ -114,4 +118,8 @@ public class VideoMediaBar extends MediaControl implements Initializable {
         return false;
     }
 
+    @Override
+    public boolean isFocused() {
+        return mediaBarController.isFocused() || fullscreenButton.isFocused();
+    }
 }

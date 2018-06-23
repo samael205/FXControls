@@ -1,36 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.media.MediaView?>
-<AnchorPane fx:id="rootPane" onMouseExited="#onMouseExited" prefHeight="360.0" prefWidth="640.0" styleClass="bg-black"
-            stylesheets="@../../resources/css/main_stylesheet.css" xmlns="http://javafx.com/javafx/9.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.davuskus.fxcontrols.playback.videoplayer.VideoPlayer">
+
+<AnchorPane fx:id="rootPane" onMouseExited="#onMouseExited" prefHeight="360.0" prefWidth="640.0" styleClass="bg-black" stylesheets="@../../resources/css/main_stylesheet.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davuskus.fxcontrols.playback.videoplayer.VideoPlayer">
     <children>
-        <StackPane fx:id="stackPane" onMouseMoved="#onMouseMoved" AnchorPane.bottomAnchor="0.0"
-                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <StackPane fx:id="stackPane" focusTraversable="true" onMouseMoved="#onMouseMoved" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <MediaView fx:id="mediaView" fitHeight="${stackPane.height}" fitWidth="${stackPane.width}"
-                           onMousePressed="#mediaViewOnMousePressed"/>
-                <GridPane fx:id="mediaControlsPane" onMousePressed="#mediaControlsPaneOnMousePressed"
-                          styleClass="bg-transparent-50">
+                <MediaView fx:id="mediaView" fitHeight="${stackPane.height}" fitWidth="${stackPane.width}" onMousePressed="#mediaViewOnMousePressed" />
+                <GridPane fx:id="mediaControlsPane" onMousePressed="#mediaControlsPaneOnMousePressed" styleClass="bg-transparent-50">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints vgrow="ALWAYS"/>
-                        <RowConstraints vgrow="SOMETIMES"/>
+                        <RowConstraints vgrow="ALWAYS" />
+                        <RowConstraints vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <fx:include fx:id="simpleControl"
-                                    source="../../playback/simplecontrols/simple_media_control.fxml"/>
-                        <fx:include fx:id="mediaBar" source="../mediabar/video/video_media_bar.fxml"
-                                    GridPane.rowIndex="1"/>
+                        <fx:include fx:id="simpleControl" source="../../playback/simplecontrols/simple_media_control.fxml" />
+                        <fx:include fx:id="mediaBar" source="../mediabar/video/video_media_bar.fxml" GridPane.rowIndex="1" />
                     </children>
                 </GridPane>
             </children>
         </StackPane>
-        <AnchorPane fx:id="outlinePane" disable="true" styleClass="border-black-2px" AnchorPane.bottomAnchor="0.0"
-                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+        <AnchorPane fx:id="outlinePane" disable="true" styleClass="border-black-2px" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
     </children>
 </AnchorPane>

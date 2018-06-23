@@ -25,4 +25,6 @@ public abstract class MediaControl {
         return controlModel.getCurrentTimeInText();
     }
 
+    public abstract boolean isFocused();
+
 }

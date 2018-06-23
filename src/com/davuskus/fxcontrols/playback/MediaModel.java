@@ -205,6 +205,17 @@ public class MediaModel {
         return false;
     }
 
+    public boolean isMediaControlFocused() {
+
+        for (MediaControl control : mediaControls) {
+            if (control.isFocused()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public boolean hasFinishedPlayingMedia() {
         return MediaPlayerUtils.hasFinishedPlaying(mediaPlayer);
     }

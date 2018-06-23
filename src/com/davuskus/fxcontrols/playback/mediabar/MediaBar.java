@@ -6,6 +6,7 @@ import com.davuskus.utils.time.TimeUtils;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
@@ -17,7 +18,13 @@ import java.util.ResourceBundle;
 public class MediaBar extends MediaControl implements Initializable {
 
     @FXML
+    private Button playButton;
+
+    @FXML
     private ImageView playImageView;
+
+    @FXML
+    private Button volumeButton;
 
     @FXML
     private Slider timeSlider;
@@ -198,6 +205,14 @@ public class MediaBar extends MediaControl implements Initializable {
 
     }
 
+    @Override
+    public boolean isFocused() {
+        return timeSlider.isFocused()
+                || playButton.isFocused()
+                || volumeButton.isFocused()
+                || volumeSlider.isFocused();
+    }
+
     private void updateTimeLabel() {
         String currentTime = TimeUtils.getTimeText((int) (0.5 + timeSlider.getValue()));
         timeLabel.setText(currentTime + "/" + controlModel.getTotalTimeInText());
@@ -207,7 +222,7 @@ public class MediaBar extends MediaControl implements Initializable {
 
         if (volumeValue <= 0) {
             volumeImageView.setImage(muteIcon);
-        } else if (volumeValue < 0.3) {
+        } else if (volumeValue < 0.2) {
             volumeImageView.setImage(lowVolumeIcon);
         } else if (volumeValue < 0.70) {
             volumeImageView.setImage(mediumVolumeIcon);
