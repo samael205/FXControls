@@ -2,6 +2,7 @@ package com.davuskus.fxcontrols.playback.mediabar;
 
 import com.davuskus.fxcontrols.playback.MediaControl;
 import com.davuskus.fxcontrols.playback.MediaModel;
+import com.davuskus.fxcontrols.slider.progress.ProgressSlider;
 import com.davuskus.utils.time.TimeUtils;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -25,9 +26,8 @@ public class MediaBar extends MediaControl implements Initializable {
 
     @FXML
     private Button volumeButton;
-
     @FXML
-    private Slider timeSlider;
+    private ProgressSlider timeSliderController;
 
     @FXML
     private Label timeLabel;
@@ -70,7 +70,7 @@ public class MediaBar extends MediaControl implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        timeSlider.setOnMousePressed(event -> {
+        timeSliderController.addOnMousePressedAction(event -> {
 
             if (controlModel.isPlaying()) {
 
@@ -82,9 +82,10 @@ public class MediaBar extends MediaControl implements Initializable {
 
         });
 
-        timeSlider.setOnMouseReleased(event -> {
+        timeSliderController.addOnMouseReleasedAction(event -> {
 
-            controlModel.setCurrentTime(timeSlider.getValue() * 1000);
+            double newTimeMillis = getTimeSliderProgressInMillis();
+            controlModel.setCurrentTime(newTimeMillis);
 
             if (wasPlaying) {
 
@@ -102,7 +103,7 @@ public class MediaBar extends MediaControl implements Initializable {
 
         });
 
-        timeSlider.valueProperty().addListener((observable, oldValue, newValue) -> updateTimeLabel());
+        timeSliderController.progressProperty().addListener((observable, oldValue, newValue) -> updateTimeLabel());
 
         volumeSlider.valueProperty().addListener((observable, oldVolume, newVolume) -> {
 
@@ -142,8 +143,9 @@ public class MediaBar extends MediaControl implements Initializable {
 
         controlModel.addCurrentTimeListener((oldDuration, currentDuration) -> {
 
-            if (!timeSlider.isValueChanging()) {
-                timeSlider.setValue(currentDuration.toSeconds());
+            if (!timeSliderController.isProgressChanging()) {
+                double progress = currentDuration.toMillis() / controlModel.getTotalTimeInMilliseconds();
+                timeSliderController.setProgress(progress);
             }
 
             updateTimeLabel();
@@ -155,9 +157,6 @@ public class MediaBar extends MediaControl implements Initializable {
             switch (newStatus) {
 
                 case READY:
-                    timeSlider.setMin(0);
-                    timeSlider.setMax(controlModel.getTotalTimeInSeconds());
-                    timeSlider.setValue(0);
                     updateTimeLabel();
                     break;
 
@@ -197,7 +196,7 @@ public class MediaBar extends MediaControl implements Initializable {
         });
 
         controlModel.addOnEndOfMediaListener(() -> {
-            timeSlider.setValue(timeSlider.getMax());
+            timeSliderController.setProgress(1);
             playImageView.setImage(replayIcon);
         });
 
@@ -207,14 +206,14 @@ public class MediaBar extends MediaControl implements Initializable {
 
     @Override
     public boolean isFocused() {
-        return timeSlider.isFocused()
+        return timeSliderController.isFocused()
                 || playButton.isFocused()
                 || volumeButton.isFocused()
                 || volumeSlider.isFocused();
     }
 
     private void updateTimeLabel() {
-        String currentTime = TimeUtils.getTimeText((int) (0.5 + timeSlider.getValue()));
+        String currentTime = TimeUtils.getTimeText((int) (0.5 + getTimeSliderProgressInSeconds()));
         timeLabel.setText(currentTime + "/" + controlModel.getTotalTimeInText());
     }
 
@@ -230,6 +229,14 @@ public class MediaBar extends MediaControl implements Initializable {
             volumeImageView.setImage(maxVolumeIcon);
         }
 
+    }
+
+    private double getTimeSliderProgressInSeconds() {
+        return timeSliderController.getProgress() * controlModel.getTotalTimeInSeconds();
+    }
+
+    private double getTimeSliderProgressInMillis() {
+        return timeSliderController.getProgress() * controlModel.getTotalTimeInMilliseconds();
     }
 
 }
