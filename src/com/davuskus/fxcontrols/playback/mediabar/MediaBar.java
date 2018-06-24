@@ -212,6 +212,14 @@ public class MediaBar extends MediaControl implements Initializable {
                 || volumeSlider.isFocused();
     }
 
+    public void setTimeSliderBarColor(String color) {
+        timeSliderController.setBarColor(color);
+    }
+
+    public void setTimeSliderBackgroundColor(String color) {
+        timeSliderController.setBackgroundColor(color);
+    }
+
     private void updateTimeLabel() {
         String currentTime = TimeUtils.getTimeText((int) (0.5 + getTimeSliderProgressInSeconds()));
         timeLabel.setText(currentTime + "/" + controlModel.getTotalTimeInText());

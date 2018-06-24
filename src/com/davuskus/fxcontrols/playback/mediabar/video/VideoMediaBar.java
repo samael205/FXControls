@@ -111,6 +111,14 @@ public class VideoMediaBar extends MediaControl implements Initializable {
 
     }
 
+    public void setTimeSliderBarColor(String color) {
+        mediaBarController.setTimeSliderBarColor(color);
+    }
+
+    public void setTimeSliderBackgroundColor(String color) {
+        mediaBarController.setTimeSliderBackgroundColor(color);
+    }
+
     public boolean isFullscreen() {
         if (fullscreenStage != null) {
             return fullscreenStage.isFullScreen();

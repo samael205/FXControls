@@ -78,6 +78,14 @@ public class ProgressSlider implements Initializable {
         return progressBar.isFocused();
     }
 
+    public void setBarColor(String color) {
+        progressBar.setStyle("-fx-accent: " + color);
+    }
+
+    public void setBackgroundColor(String color) {
+        progressBar.setStyle("-fx-control-inner-background: " + color);
+    }
+
     private void mouseEventAction(MouseEvent event) {
         if (event.getButton().equals(MouseButton.PRIMARY)) {
 
@@ -100,6 +108,5 @@ public class ProgressSlider implements Initializable {
         setProgress(eventX / progressBar.getWidth());
 
     }
-
 
 }

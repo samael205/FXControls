@@ -38,7 +38,7 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
     private GridPane mediaControlsPane;
 
     @FXML
-    private MediaControl mediaBarController;
+    private VideoMediaBar mediaBarController;
 
     @FXML
     private MediaControl simpleControlController;
@@ -273,7 +273,15 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
     }
 
     public boolean isFullscreen() {
-        return ((VideoMediaBar) mediaBarController).isFullscreen();
+        return mediaBarController.isFullscreen();
+    }
+
+    public void setTimeSliderBarColor(String color) {
+        mediaBarController.setTimeSliderBarColor(color);
+    }
+
+    public void setTimeSliderBackgroundColor(String color) {
+        mediaBarController.setTimeSliderBackgroundColor(color);
     }
 
     private void initControlsFadeAnimations() {
