@@ -1,9 +1,11 @@
-.progress-bar > .bar {
-    -fx-background-insets: 1 1 2 1;
-    -fx-padding: 0.4em;
+.progress-bar > .track {
+    -fx-background-radius: 2px;
+    -fx-border-radius: 2px;
 }
 
-.button {
-    -fx-cursor: hand;
-    -fx-background-radius: 10 10 10 10;
+.progress-bar > .bar {
+    -fx-background-insets: 0 0 0 0;
+    -fx-padding: 0.4em;
+    -fx-background-radius: 2px;
+    -fx-border-radius: 2px;
 }

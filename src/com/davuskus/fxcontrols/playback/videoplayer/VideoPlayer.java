@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -102,11 +103,17 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
 
         stackPane.setOnKeyPressed(event -> {
 
-            if (!controlModel.isMediaControlFocused()) {
+            if (event.getCode().equals(KeyCode.SPACE) && !controlModel.isMediaControlFocused()) {
+
                 controlModel.playSwitch();
+
             }
 
         });
+
+        setTimeSliderBackgroundColor("white");
+
+        setVolumeSliderBackgroundColor("white");
 
         setTimeSliderBarColor("red");
 
