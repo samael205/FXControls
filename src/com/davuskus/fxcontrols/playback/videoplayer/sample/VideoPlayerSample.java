@@ -38,6 +38,7 @@ public class VideoPlayerSample extends Application implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        videoPlayerController.setTimeSliderBarColor("red");
         videoPlayerController.setAutoPlaying(true);
         videoPlayerController.setMedia(getClass().getResource("video_player_sample_video.mp4"));
 
