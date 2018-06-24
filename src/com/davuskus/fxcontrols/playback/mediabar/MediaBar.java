@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -25,18 +24,16 @@ public class MediaBar extends MediaControl implements Initializable {
     private ImageView playImageView;
 
     @FXML
-    private Button volumeButton;
-    @FXML
     private ProgressSlider timeSliderController;
 
     @FXML
     private Label timeLabel;
 
     @FXML
-    private ImageView volumeImageView;
+    private Button volumeButton;
 
     @FXML
-    private ProgressBar volumeSlider;
+    private ImageView volumeImageView;
 
     @FXML
     private ProgressSlider volumeSliderController;
