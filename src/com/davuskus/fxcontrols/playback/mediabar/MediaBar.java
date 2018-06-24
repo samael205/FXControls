@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -36,7 +35,7 @@ public class MediaBar extends MediaControl implements Initializable {
     private ImageView volumeImageView;
 
     @FXML
-    private Slider volumeSlider;
+    private ProgressSlider volumeSliderController;
 
     private final Image pauseIcon;
 
@@ -105,7 +104,9 @@ public class MediaBar extends MediaControl implements Initializable {
 
         timeSliderController.progressProperty().addListener((observable, oldValue, newValue) -> updateTimeLabel());
 
-        volumeSlider.valueProperty().addListener((observable, oldVolume, newVolume) -> {
+        volumeSliderController.setProgress(1);
+
+        volumeSliderController.progressProperty().addListener((observable, oldVolume, newVolume) -> {
 
             controlModel.setVolume(newVolume.doubleValue());
 
@@ -180,15 +181,15 @@ public class MediaBar extends MediaControl implements Initializable {
 
             if (isMute) {
 
-                volumeBeforeMute = volumeSlider.getValue();
-                volumeSlider.setValue(0);
+                volumeBeforeMute = volumeSliderController.getProgress();
+                volumeSliderController.setProgress(0);
 
-            } else if (!volumeSlider.isValueChanging()) {
+            } else if (!volumeSliderController.isProgressChanging()) {
 
                 if (volumeBeforeMute <= 0) {
-                    volumeSlider.setValue(1);
+                    volumeSliderController.setProgress(1);
                 } else {
-                    volumeSlider.setValue(volumeBeforeMute);
+                    volumeSliderController.setProgress(volumeBeforeMute);
                 }
 
             }
@@ -209,7 +210,7 @@ public class MediaBar extends MediaControl implements Initializable {
         return timeSliderController.isFocused()
                 || playButton.isFocused()
                 || volumeButton.isFocused()
-                || volumeSlider.isFocused();
+                || volumeSliderController.isFocused();
     }
 
     public void setTimeSliderBarColor(String color) {
@@ -218,6 +219,14 @@ public class MediaBar extends MediaControl implements Initializable {
 
     public void setTimeSliderBackgroundColor(String color) {
         timeSliderController.setBackgroundColor(color);
+    }
+
+    public void setVolumeSliderBarColor(String color) {
+        volumeSliderController.setBarColor(color);
+    }
+
+    public void setVolumeSliderBackgroundColor(String color) {
+        volumeSliderController.setBackgroundColor(color);
     }
 
     private void updateTimeLabel() {
