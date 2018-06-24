@@ -73,7 +73,13 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
         fadeOutDelayMillis = 2000;
 
         hideCursorDelay = 2000;
-        hideCursorDelayedRunnable = new DelayedRunnable(() -> stackPane.setCursor(Cursor.NONE));
+        hideCursorDelayedRunnable = new DelayedRunnable(() -> {
+
+            if (isInFront(mediaView)) {
+                stackPane.setCursor(Cursor.NONE);
+            }
+
+        });
 
     }
 
@@ -92,7 +98,7 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
 
         initControlsFadeAnimations();
 
-        ((VideoMediaBar) mediaBarController).setFullscreenComponents(stackPane, rootPane);
+        mediaBarController.setFullscreenComponents(stackPane, rootPane);
 
         stackPane.setOnKeyPressed(event -> {
 
@@ -101,6 +107,10 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
             }
 
         });
+
+        setTimeSliderBarColor("red");
+
+        setVolumeSliderBarColor("gray");
 
         hasInitialized = true;
 
@@ -327,6 +337,8 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
     private void fadeInControls() {
 
         mediaControlsPane.setDisable(false);
+
+        stackPane.setCursor(Cursor.DEFAULT);
 
         switchView(mediaControlsPane);
 
