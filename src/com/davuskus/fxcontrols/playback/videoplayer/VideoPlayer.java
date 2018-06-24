@@ -163,6 +163,8 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
 
         mediaControlsBgWasPressed = true;
 
+        controlModel.playMedia();
+
         controlsFadeOutAnimation.play();
 
     }
