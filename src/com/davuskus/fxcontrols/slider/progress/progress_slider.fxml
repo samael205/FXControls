@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ProgressBar?>
+
+
+  <ProgressBar fx:id="progressBar" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" prefWidth="300.0" progress="0.0" stylesheets="@../../resources/css/progress_slider_stylesheet.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davuskus.fxcontrols.slider.progress.ProgressSlider" />
