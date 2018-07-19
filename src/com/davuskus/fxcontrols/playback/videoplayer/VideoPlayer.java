@@ -309,6 +309,10 @@ public class VideoPlayer implements Initializable, ISelectionListener<Media> {
         mediaBarController.setVolumeSliderBackgroundColor(color);
     }
 
+    public MediaModel getMediaModel() {
+        return controlModel;
+    }
+
     private void initControlsFadeAnimations() {
 
         controlsFadeInAnimation = AnimationCreator.getOpacityChangeAnimation(
